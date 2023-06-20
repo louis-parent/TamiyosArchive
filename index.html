@@ -10,7 +10,7 @@
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/louis-parent/Quill@main/styles/Quill.css" />
 		<link rel="stylesheet" href="style.css" />
 		
-		<script defer src="scripts/scan.js"></script>
+		<script defer type="module" src="scripts/scan.js"></script>
 	</head>
 	<body class="background dark">
 		<header class="padding step">
@@ -47,19 +47,25 @@
 			
 			<section class="column stretch at-center full-width">
 				<div class="row spaced at-center bottom-margin far">
-					<select id="set" placeholder=""></select>
-					<input id="collector" type="number" placeholder="Num." />
+					<select id="set-selector" placeholder=""></select>
+					<input id="collector-input" type="number" placeholder="Num." />
 					<button id="add" class="cta primary floating">+</button>				
 				</div>
 				
 				<div class="row spaced at-center stretch">
 					<div class="row from-center at-center">
-						<img id="card" alt="" />
+						<input id="oracle" type="hidden" />
+						<input id="set" type="hidden" />
+						<input id="collector-number" type="hidden" />
+						
+						<img id="card" class="rounded" />
 					</div>
 					<div class="column stretch at-center">
-						<button class="cta primary soft-rounded bottom-margin step">Changer pour Foil</button>
-						<button class="cta secondary soft-rounded bottom-margin step">Ajouter une autre</button>
-						<button class="cta secondary soft-rounded bottom-margin step">Supprimer</button>
+						<button id="to-foil" class="cta primary soft-rounded bottom-margin near">Changer pour Foil</button>
+						<button id="add-more" class="cta secondary soft-rounded bottom-margin step">Ajouter une autre</button>
+						<button id="add-more-foil" class="cta secondary soft-rounded bottom-margin near">Ajouter une autre Foil</button>
+						<button id="remove" class="cta secondary soft-rounded bottom-margin step">Supprimer</button>
+						<button id="remove-foil" class="cta secondary soft-rounded bottom-margin step">Supprimer une Foil</button>
 					</div>
 				</div>
 			</section>
