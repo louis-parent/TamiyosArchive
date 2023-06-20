@@ -13,8 +13,8 @@
 		<script defer src="scripts/scan.js"></script>
 	</head>
 	<body class="background dark">
-		<header>
-			<h1>Les Archives de Tamiyo</h1>
+		<header class="padding step">
+			<h1 class="no-margin">Les Archives de Tamiyo</h1>
 		</header>
 		
 		<main>			
@@ -45,19 +45,21 @@
 				</span>
 			</nav>
 			
-			<section class="column stretch at-center">
-				<div class="row spaced at-center">
+			<section class="column stretch at-center full-width">
+				<div class="row spaced at-center bottom-margin far">
 					<select id="set" placeholder=""></select>
 					<input id="collector" type="number" placeholder="Num." />
-					<button id="add">+</button>				
+					<button id="add" class="cta primary floating">+</button>				
 				</div>
 				
-				<div class="row spaced at-center">
-					<img id="card" alt="" />
+				<div class="row spaced at-center stretch">
+					<div class="row from-center at-center">
+						<img id="card" alt="" />
+					</div>
 					<div class="column stretch at-center">
-						<button>Changer pour Foil</button>
-						<button>Ajouter une autre</button>
-						<button>Supprimer</button>
+						<button class="cta primary soft-rounded bottom-margin step">Changer pour Foil</button>
+						<button class="cta secondary soft-rounded bottom-margin step">Ajouter une autre</button>
+						<button class="cta secondary soft-rounded bottom-margin step">Supprimer</button>
 					</div>
 				</div>
 			</section>
