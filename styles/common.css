@@ -19,8 +19,6 @@
 	
 	--headline-font: 'Montserrat', sans-serif;
 	--paragraph-font: 'Nunito', sans-serif;
-	
-	--spacer: 2rem;
 }
 
 body
@@ -39,16 +37,18 @@ nav
 {	
 	height: 75vh;
 	
-	margin: 0 var(--spacer);
-	padding: calc(var(--spacer) / 2);
+	margin: 0 var(--midrange-space);
+	padding: calc(var(--midrange-space) / 2);
 	
 	border-radius: var(--very-rounded-radius);
 }
 
 nav > *
 {
-	margin-bottom: calc(var(--spacer) / 2);
+	margin-bottom: calc(var(--midrange-space) / 2);
 	width: 100%;
+	text-decoration: none;
+	color: var(--neutral-lightest-color);
 }
 
 nav > .selected

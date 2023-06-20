@@ -5,11 +5,8 @@ class CardCollection {
 		this.cards = new Object();
 		
 		for(const oracle of Object.keys(cards || {})) {
-			console.log(oracle, "in", Object.keys(cards || {}));
 			for(const set of Object.keys(cards[oracle] || {})) {
-				console.log(set, "in", Object.keys(cards[oracle] || {}));
 				for(const collectorNumber of Object.keys(cards[oracle][set] || {})) {
-					console.log(collectorNumber, "in", Object.keys(cards[oracle][set] || {}));
 					this.add(oracle, set, collectorNumber, true, cards[oracle][set][collectorNumber].foil || 0);
 					this.add(oracle, set, collectorNumber, false, cards[oracle][set][collectorNumber].nonFoil || 0);
 				}

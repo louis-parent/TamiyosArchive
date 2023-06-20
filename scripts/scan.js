@@ -17,6 +17,8 @@ document.addEventListener("DOMContentLoaded", () => {
 			return new Date(b.released_at) - new Date(a.released_at)
 		});
 
+		setSelector.innerHTML = "";
+
 		for(const set of setList) {
 			const option = document.createElement("option");
 			option.value = set.code;
