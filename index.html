@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<title>Les Archives de Tamiyo</title>
+		<meta charset="UTF-8" />
+		
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&family=Nunito&family=Strait&display=swap" />
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/louis-parent/Quill@main/styles/Quill.css" />
+		<link rel="stylesheet" href="style.css" />
+		
+		<script defer src="scripts/scan.js"></script>
+	</head>
+	<body class="background dark">
+		<header>
+			<h1>Les Archives de Tamiyo</h1>
+		</header>
+		
+		<main>			
+			<nav class="background above column from-start at-center">
+				<span class="column at-center">
+					<img alt="Gallery icon" src="assets/search.png" height="32" width="32" />
+					Explore
+				</span>
+				
+				<span class="column at-center">
+					<img alt="Gallery icon" src="assets/gallery.png" height="32" width="32" />
+					Collection
+				</span>
+				
+				<span class="column at-center">
+					<img alt="Pack icon" src="assets/pack.png" height="32" width="32" />
+					Decks
+				</span>
+				
+				<span class="column at-center">
+					<img alt="Stats icon" src="assets/stats.png" height="32" width="32" />
+					Stats
+				</span>
+				
+				<span class="column at-center selected">
+					<img alt="Scan icon" src="assets/scan.png" height="32" width="32" />
+					Scan
+				</span>
+			</nav>
+			
+			<section class="column stretch at-center">
+				<div class="row spaced at-center">
+					<select id="set" placeholder=""></select>
+					<input id="collector" type="number" placeholder="Num." />
+					<button id="add">+</button>				
+				</div>
+				
+				<div class="row spaced at-center">
+					<img id="card" alt="" />
+					<div class="column stretch at-center">
+						<button>Changer pour Foil</button>
+						<button>Ajouter une autre</button>
+						<button>Supprimer</button>
+					</div>
+				</div>
+			</section>
+		</main>
+	</body>
+</html>

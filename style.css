@@ -1,0 +1,63 @@
+:root
+{	
+	--primary: #8677A6;
+	--primary-light-color: hsla(259, 21%, 25%, 1);
+	--primary-color: hsla(259, 21%, 50%, 1);
+	--primary-dark-color: hsla(259, 21%, 75%, 1);
+	
+	--secondary: #F2DABD;
+	--secondary-light-color: hsla(33, 67%, 25%, 1);
+	--secondary-color: hsla(33, 67%, 50%, 1);
+	--secondary-dark-color: hsla(33, 67%, 75%, 1);
+	
+	--neutral: #7e7986;
+	--neutral-lightest-color: hsla(263, 5%, 90%, 1);
+	--neutral-lighter-color: hsla(263, 5%, 66%, 1);
+	--neutral-color: hsla(263, 5%, 45%, 1);
+	--neutral-darker-color: hsla(263, 5%, 20%, 1);
+	--neutral-darkest-color: hsla(263, 5%, 5%, 1);
+	
+	--headline-font: 'Montserrat', sans-serif;
+	--paragraph-font: 'Nunito', sans-serif;
+	
+	--spacer: 2rem;
+}
+
+body
+{
+	display: flex;
+	flex-direction: column;
+}
+
+main
+{
+	display: flex;
+	flex-direction: row;
+}
+
+nav
+{	
+	height: 75vh;
+	
+	margin: 0 var(--spacer);
+	padding: calc(var(--spacer) / 2);
+	
+	border-radius: 2rem;
+}
+
+nav > *
+{
+	margin-bottom: calc(var(--spacer) / 2);
+	width: 100%;
+}
+
+nav > .selected
+{
+	border-left: solid 3px var(--secondary-color);
+	border-radius: 3px;
+}
+
+main > section
+{
+	width: auto;
+}
