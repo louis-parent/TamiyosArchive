@@ -54,6 +54,7 @@ nav > *
 nav > .selected
 {
 	border-left: solid 3px var(--primary-color);
+	padding-left: 3px;
 	border-radius: 3px;
 }
 

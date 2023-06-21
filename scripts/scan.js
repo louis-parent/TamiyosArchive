@@ -1,3 +1,4 @@
+import Scryfall from "./scryfall/Scryfall.js";
 import cardCollection from "./CardCollection.js";
 
 function withSelectedCard(operation) {
@@ -9,12 +10,14 @@ function withSelectedCard(operation) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-	fetch("https://api.scryfall.com/sets").then(response => response.json()).then(sets => {
+	Scryfall.sets.then(sets => {
 		const setSelector = document.querySelector("#set-selector");
-		const setList = sets.data.filter(set => {
-			return new Date(set.released_at) <= new Date();
+		const now = new Date();
+		
+		const setList = sets.filter(set => {
+			return set.releasedAt <= now;
 		}).sort((a, b) => {
-			return new Date(b.released_at) - new Date(a.released_at)
+			return b.releasedAt - a.releasedAt;
 		});
 
 		setSelector.innerHTML = "";
@@ -38,15 +41,15 @@ document.addEventListener("DOMContentLoaded", () => {
 		const collectorInput = document.querySelector("#collector-input");
 		const collectorNumber = collectorInput.value;
 		const set = document.querySelector("#set-selector").value;
-
-		fetch(`https://api.scryfall.com/cards/${set}/${collectorNumber}/fr`).then(response => response.json()).then(data => {
-			document.querySelector("#oracle").value = data.oracle_id;
-			document.querySelector("#set").value = data.set;
-			document.querySelector("#collector-number").value = data.collector_number;
-			document.querySelector("#card").src = data.image_uris.normal;
+		
+		Scryfall.getCardByCollectorNumber(set, collectorNumber).then(card => {
+			document.querySelector("#oracle").value = card.oracle.id;
+			document.querySelector("#set").value = set;
+			document.querySelector("#collector-number").value = collectorNumber;
+			document.querySelector("#card").src = card.faces[0];
 			
 			cardCollection.synchronized(() => {
-				cardCollection.add(data.oracle_id, data.set, data.collector_number, false, 1);
+				cardCollection.add(card.oracle.id, set, collectorNumber, false, 1);
 			});
 			
 			collectorInput.focus();

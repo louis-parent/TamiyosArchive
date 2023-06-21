@@ -1,8 +1,10 @@
+import Scryfall from "./scryfall/Scryfall.js";
+
 class CardCollection {
 	static STORAGE_NAME = "collection";
 	
 	constructor(cards) {
-		this.cards = new Object();
+		this.collection = new Object();
 		
 		for(const oracle of Object.keys(cards || {})) {
 			for(const set of Object.keys(cards[oracle] || {})) {
@@ -15,32 +17,32 @@ class CardCollection {
 	}
 	
 	add(oracle, set, collectorNumber, isFoil, number) {
-		if(this.cards[oracle] === undefined) {
-			this.cards[oracle] = new Object();
+		if(this.collection[oracle] === undefined) {
+			this.collection[oracle] = new Object();
 		}
 		
-		if(this.cards[oracle][set] === undefined) {
-			this.cards[oracle][set] = new Object();
+		if(this.collection[oracle][set] === undefined) {
+			this.collection[oracle][set] = new Object();
 		}
 		
-		if(this.cards[oracle][set][collectorNumber] === undefined) {
-			this.cards[oracle][set][collectorNumber] = {
+		if(this.collection[oracle][set][collectorNumber] === undefined) {
+			this.collection[oracle][set][collectorNumber] = {
 				foil: 0,
 				nonFoil: 0
 			};
 		}
 		
-		this.cards[oracle][set][collectorNumber][isFoil ? "foil" : "nonFoil"] += (number || 1);
+		this.collection[oracle][set][collectorNumber][isFoil ? "foil" : "nonFoil"] += (number || 1);
 	}
 	
 	remove(oracle, set, collectorNumber, isFoil, number) {
-		if(this.cards[oracle] !== undefined) {
-			if(this.cards[oracle][set] !== undefined) {
-				if(this.cards[oracle][set][collectorNumber] !== undefined) {
-					this.cards[oracle][set][collectorNumber][isFoil ? "foil" : "nonFoil"] -= (number || 1);
+		if(this.collection[oracle] !== undefined) {
+			if(this.collection[oracle][set] !== undefined) {
+				if(this.collection[oracle][set][collectorNumber] !== undefined) {
+					this.collection[oracle][set][collectorNumber][isFoil ? "foil" : "nonFoil"] -= (number || 1);
 					
-					if(this.cards[oracle][set][collectorNumber][isFoil ? "foil" : "nonFoil"] < 0) {
-						this.cards[oracle][set][collectorNumber][isFoil ? "foil" : "nonFoil"] = 0;
+					if(this.collection[oracle][set][collectorNumber][isFoil ? "foil" : "nonFoil"] < 0) {
+						this.collection[oracle][set][collectorNumber][isFoil ? "foil" : "nonFoil"] = 0;
 					}
 				}
 			}
@@ -53,7 +55,20 @@ class CardCollection {
 	}
 	
 	saveToStorage() {
-		localStorage.setItem(CardCollection.STORAGE_NAME, JSON.stringify(this.cards));
+		localStorage.setItem(CardCollection.STORAGE_NAME, JSON.stringify(this.collection));
+	}
+	
+	get cards() {
+		const cards = new Array();
+		
+		for(const oracle of Object.keys(this.collection)) {
+			const set = Object.keys(this.collection[oracle])[0];
+			const collectorNumber = Object.keys(this.collection[oracle][Object.keys(this.collection[oracle])[0]])[0];
+			
+			cards.push(Scryfall.getCardByCollectorNumber(set, collectorNumber));
+		}
+		
+		return Promise.all(cards);
 	}
 	
 	static loadFromStorage() {
