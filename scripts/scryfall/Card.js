@@ -20,7 +20,20 @@ class Card {
 				faces: data.card_faces !== undefined
 					? data.card_faces.map(face => face.image_uris.png)
 					: [data.image_uris.png]
-			}));
+			}))
+			.catch(error => {
+				return fetch(`https://api.scryfall.com/cards/${set.toLowerCase()}/${collectorNumber}/en`)
+					.then(response => response.json())
+					.then(data => new Card(data.id, {
+						oracle: {
+							id: data.oracle_id,
+							name: data.name
+						},
+						faces: data.card_faces !== undefined
+							? data.card_faces.map(face => face.image_uris.png)
+							: [data.image_uris.png]
+					}));
+			});
 	}
 }
 
