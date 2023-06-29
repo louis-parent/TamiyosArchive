@@ -1,4 +1,4 @@
-import cardCollection from "./CardCollection.js";
+import cardCollection from "./collection/CardCollection.js";
 
 document.addEventListener("DOMContentLoaded", () => {
 	cardCollection.cards.then(cards => cards.forEach(card => {

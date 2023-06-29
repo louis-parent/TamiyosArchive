@@ -49,6 +49,18 @@
 				<div class="row spaced at-center bottom-margin far">
 					<select id="set-selector" placeholder=""><option>Chargement...</option></select>
 					<input id="collector-input" type="number" placeholder="Num." />
+					<select id="language-selector">
+						<option value="en">Anglais</option>
+						<option value="es">Espagnol</option>
+						<option value="fr" selected>Français</option>
+						<option value="de">Allemand</option>
+						<option value="it">Italien</option>
+						<option value="pt">Portugais</option>
+						<option value="jp">Japonais</option>
+						<option value="kr">Koréen</option>
+						<option value="ru">Russe</option>
+						<option value="ph">Phyrexian</option>
+					</select>
 					<button id="add" class="cta primary floating">+</button>				
 				</div>
 				
@@ -57,6 +69,7 @@
 						<input id="oracle" type="hidden" />
 						<input id="set" type="hidden" />
 						<input id="collector-number" type="hidden" />
+						<input id="language" type="hidden" />
 						
 						<img id="card" class="rounded quarter-screen-width" />
 					</div>

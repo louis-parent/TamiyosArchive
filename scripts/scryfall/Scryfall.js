@@ -9,8 +9,8 @@ class Scryfall
 		});
 	}
 	
-	static getCardByCollectorNumber(set, collectorNumber) {
-		return Card.forCollectorNumber(set, collectorNumber);
+	static getCardByCollectorNumber(set, collectorNumber, language) {
+		return Card.forCollectorNumber(set, collectorNumber, language);
 	}
 }
 
