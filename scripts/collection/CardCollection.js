@@ -19,6 +19,10 @@ class CardCollection {
 		}
 	}
 	
+	get items() {		
+		return Object.values(this.collection);
+	}
+	
 	add(oracle, set, collectorNumber, language, isFoil, number) {
 		if(this.collection[oracle] === undefined) {
 			this.collection[oracle] = new CollectionItem(oracle);
@@ -39,21 +43,27 @@ class CardCollection {
 	}
 	
 	saveToStorage() {
-		localStorage.setItem(CardCollection.STORAGE_NAME, JSON.stringify(this.raw));
+		localStorage.setItem(CardCollection.STORAGE_NAME, JSON.stringify(this.raw()));
 	}
 	
-	get items() {		
-		return Object.values(this.collection);
-	}
-	
-	get raw() {
+	raw() {
 		const raw = new Object();
 		
 		for(const oracle in this.collection) {
-			raw[oracle] = this.collection[oracle].raw;
+			raw[oracle] = this.collection[oracle].raw();
 		}
 		
 		return raw;
+	}
+	
+	async toCSV() {
+		let csv = "Multiverse ID,Name,Set code,Count,Foil count";
+		
+		for(const item of Object.values(this.collection)) {
+			csv += "\n" + await item.toCSV();
+		}
+		
+		return csv;
 	}
 	
 	static loadFromStorage() {

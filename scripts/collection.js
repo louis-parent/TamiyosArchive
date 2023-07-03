@@ -32,4 +32,14 @@ document.addEventListener("DOMContentLoaded", () => {
 		
 		document.querySelector("#cards").appendChild(container);
 	});
+	
+	document.querySelector("#export").addEventListener("click", async () => {
+		const csv = await cardCollection.toCSV();
+		const blob = new Blob([csv]);
+		const downloader = document.createElement("a");
+		downloader.download = "export.csv";
+		downloader.type = "text/csv";
+		downloader.href = URL.createObjectURL(blob);
+		downloader.click();
+	});
 });

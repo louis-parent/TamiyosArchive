@@ -15,39 +15,6 @@ class CollectionItem {
 		}
 	}
 	
-	add(set, collectorNumber, language, isFoil, amount) {
-		if(this.owned[set] === undefined) {
-			this.owned[set] = new Object();
-		}
-		
-		if(this.owned[set][collectorNumber] === undefined) {
-			this.owned[set][collectorNumber] = new Object();
-		}
-		
-		if(this.owned[set][collectorNumber][language] === undefined) {
-			this.owned[set][collectorNumber][language] = {
-				foil: 0,
-				nonFoil: 0
-			};
-		}
-		
-		this.owned[set][collectorNumber][language][isFoil ? "foil" : "nonFoil"] += (amount !== undefined ? amount : 1);
-	}
-	
-	remove(set, collectorNumber, language, isFoil, amount) {
-		if(this.owned[set] !== undefined) {
-			if(this.owned[set][collectorNumber] !== undefined) {
-				if(this.owned[set][collectorNumber][language] !== undefined) {
-					this.owned[set][collectorNumber][language][isFoil ? "foil" : "nonFoil"] -= (amount !== undefined ? amount : 1);
-					
-					if(this.owned[set][collectorNumber][language][isFoil ? "foil" : "nonFoil"] < 0) {
-						this.owned[set][collectorNumber][language][isFoil ? "foil" : "nonFoil"] = 0;
-					}
-				}
-			}
-		}
-	}
-	
 	get newestCard() {
 		const set = Object.keys(this.owned)[0];
 		const collectorNumber = Object.keys(this.owned[set])[0];
@@ -99,8 +66,69 @@ class CollectionItem {
 		return count;
 	}
 	
-	get raw() {
+	add(set, collectorNumber, language, isFoil, amount) {
+		if(this.owned[set] === undefined) {
+			this.owned[set] = new Object();
+		}
+		
+		if(this.owned[set][collectorNumber] === undefined) {
+			this.owned[set][collectorNumber] = new Object();
+		}
+		
+		if(this.owned[set][collectorNumber][language] === undefined) {
+			this.owned[set][collectorNumber][language] = {
+				foil: 0,
+				nonFoil: 0
+			};
+		}
+		
+		this.owned[set][collectorNumber][language][isFoil ? "foil" : "nonFoil"] += (amount !== undefined ? amount : 1);
+	}
+	
+	remove(set, collectorNumber, language, isFoil, amount) {
+		if(this.owned[set] !== undefined) {
+			if(this.owned[set][collectorNumber] !== undefined) {
+				if(this.owned[set][collectorNumber][language] !== undefined) {
+					this.owned[set][collectorNumber][language][isFoil ? "foil" : "nonFoil"] -= (amount !== undefined ? amount : 1);
+					
+					if(this.owned[set][collectorNumber][language][isFoil ? "foil" : "nonFoil"] < 0) {
+						this.owned[set][collectorNumber][language][isFoil ? "foil" : "nonFoil"] = 0;
+					}
+				}
+			}
+		}
+	}
+	
+	raw() {
 		return {...this.owned};
+	}
+	
+	async toCSV() {
+		let csv = "";
+		let isFirst = true;
+		
+		for(const set in this.owned) {
+			for(const collectorNumber in this.owned[set]) {
+				for(const language in this.owned[set][collectorNumber]) {
+					const card = await Scryfall.getCardByCollectorNumber(set, collectorNumber, language);
+					
+					if(isFirst) {
+						isFirst = false;
+					}
+					else {
+						csv += "\n";
+					}
+					
+					csv += card.multiverseIds[0] + 
+							",\"" + card.oracle.name.split("//")[0].trim() + "\"" +
+							",\"" + set.toUpperCase() + "\"" +
+							"," + (this.owned[set][collectorNumber][language].nonFoil + this.owned[set][collectorNumber][language].foil) +
+							"," + this.owned[set][collectorNumber][language].foil;
+				}
+			}
+		}
+		
+		return csv;
 	}
 }
 
