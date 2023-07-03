@@ -56,6 +56,49 @@ class CollectionItem {
 		return Scryfall.getCardByCollectorNumber(set, collectorNumber, language);
 	}
 	
+	get count() {
+		let count = 0;
+		
+		for(const set in this.owned) {
+			for(const collectorNumber in this.owned[set]) {
+				for(const language in this.owned[set][collectorNumber]) {
+					count += this.owned[set][collectorNumber][language].foil;
+					count += this.owned[set][collectorNumber][language].nonFoil;
+				}
+			}
+		}
+		
+		return count;
+	}
+	
+	get foilCount() {
+		let count = 0;
+		
+		for(const set in this.owned) {
+			for(const collectorNumber in this.owned[set]) {
+				for(const language in this.owned[set][collectorNumber]) {
+					count += this.owned[set][collectorNumber][language].foil;
+				}
+			}
+		}
+		
+		return count;
+	}
+	
+	get nonFoilCount() {
+		let count = 0;
+		
+		for(const set in this.owned) {
+			for(const collectorNumber in this.owned[set]) {
+				for(const language in this.owned[set][collectorNumber]) {
+					count += this.owned[set][collectorNumber][language].nonFoil;
+				}
+			}
+		}
+		
+		return count;
+	}
+	
 	get raw() {
 		return {...this.owned};
 	}

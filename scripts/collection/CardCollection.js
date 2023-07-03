@@ -42,14 +42,8 @@ class CardCollection {
 		localStorage.setItem(CardCollection.STORAGE_NAME, JSON.stringify(this.raw));
 	}
 	
-	get cards() {
-		const cards = new Array();
-		 
-		for(const oracle in this.collection) {
-			cards.push(this.collection[oracle].newestCard);
-		}
-		
-		return Promise.all(cards);
+	get items() {		
+		return Object.values(this.collection);
 	}
 	
 	get raw() {
