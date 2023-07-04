@@ -10,6 +10,12 @@ function withSelectedCard(operation) {
 	operation(oracle, set, collectorNumber, language);
 }
 
+function prepareForNextInput() {
+	const collectorInput = document.querySelector("#collector-input");
+	collectorInput.focus();
+  		collectorInput.select();
+}
+
 document.addEventListener("DOMContentLoaded", () => {
 	Scryfall.sets.then(sets => {
 		const setSelector = document.querySelector("#set-selector");
@@ -55,8 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
 				cardCollection.add(card.oracle.id, card.set, card.collectorNumber, card.language, false, 1);
 			});
 			
-			collectorInput.focus();
-	  		collectorInput.select();
+			prepareForNextInput();
 		});
 	});
 
@@ -66,6 +71,8 @@ document.addEventListener("DOMContentLoaded", () => {
 				cardCollection.remove(oracle, set, collectorNumber, false, 1);
 				cardCollection.add(oracle, set, collectorNumber, language, true, 1);
 			});
+			
+			prepareForNextInput();
 		});
 	});
 
@@ -74,6 +81,8 @@ document.addEventListener("DOMContentLoaded", () => {
 			cardCollection.synchronized(() => {
 				cardCollection.add(oracle, set, collectorNumber, language, false, 1);
 			});
+			
+			prepareForNextInput();
 		});
 	});
 
@@ -82,6 +91,8 @@ document.addEventListener("DOMContentLoaded", () => {
 			cardCollection.synchronized(() => {
 				cardCollection.add(oracle, set, collectorNumber, language, true, 1);
 			});
+			
+			prepareForNextInput();
 		});
 	});
 
@@ -90,6 +101,8 @@ document.addEventListener("DOMContentLoaded", () => {
 			cardCollection.synchronized(() => {
 				cardCollection.remove(oracle, set, collectorNumber, language, false, 1);
 			});
+			
+			prepareForNextInput();
 		});
 	});
 
@@ -98,6 +111,8 @@ document.addEventListener("DOMContentLoaded", () => {
 			cardCollection.synchronized(() => {
 				cardCollection.remove(oracle, set, collectorNumber, language, true, 1);
 			});
+			
+			prepareForNextInput();
 		});
 	});
 });
