@@ -46,10 +46,12 @@
 			</nav>
 			
 			<section class="column stretch at-center full-width">
-				<div class="row spaced at-center bottom-margin far">
-					<select id="set-selector" class="outlined primary"><option>Chargement...</option></select>
-					<input id="collector-input" class="outlined primary" type="number" placeholder="Num." min="1" step="1" />
-					<select id="language-selector" class="outlined primary">
+				<div class="row at-center bottom-margin far">
+					<select id="set-selector" class="outlined primary right-margin near"><option>Chargement...</option></select>
+					
+					<input id="collector-input" class="outlined primary right-margin near" type="number" placeholder="Num." min="1" step="1" />
+					
+					<select id="language-selector" class="outlined primary right-margin near">
 						<option value="en">Anglais</option>
 						<option value="es">Espagnol</option>
 						<option value="fr" selected>Français</option>
@@ -61,6 +63,7 @@
 						<option value="ru">Russe</option>
 						<option value="ph">Phyrexian</option>
 					</select>
+					
 					<button id="add" class="cta primary floating">+</button>				
 				</div>
 				
@@ -75,10 +78,26 @@
 					</div>
 					<div class="column stretch at-center">
 						<button id="to-foil" class="cta primary soft-rounded bottom-margin near">✨ Changer pour Foil ✨</button>
-						<button id="add-more" class="icon-prefixed cta secondary soft-rounded bottom-margin step"><b>➕</b> Ajouter une autre</button>
-						<button id="add-more-foil" class="icon-prefixed cta secondary soft-rounded bottom-margin near"><b>➕</b> Ajouter une autre Foil</button>
-						<button id="remove" class="icon-prefixed cta secondary soft-rounded bottom-margin step"><b>➖</b> Supprimer</button>
-						<button id="remove-foil" class="icon-prefixed cta secondary soft-rounded bottom-margin step"><b>➖</b> Supprimer une Foil</button>
+						
+						<button id="add-more" class="icon-prefixed cta secondary soft-rounded bottom-margin step">
+							<b>➕</b>
+							<span>Ajouter une autre</span>
+						</button>
+						
+						<button id="add-more-foil" class="icon-prefixed cta secondary soft-rounded bottom-margin near">
+							<b>➕</b>
+							<span>Ajouter une autre Foil</span>
+						</button>
+						
+						<button id="remove" class="icon-prefixed cta secondary soft-rounded bottom-margin step">
+							<b>➖</b>
+							<span>Supprimer</span>
+						</button>
+						
+						<button id="remove-foil" class="icon-prefixed cta secondary soft-rounded bottom-margin step">
+							<b>➖</b>
+							<span>Supprimer une Foil</span>
+						</button>
 					</div>
 				</div>
 			</section>
