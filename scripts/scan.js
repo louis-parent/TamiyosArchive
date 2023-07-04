@@ -34,7 +34,7 @@ function searchAndAddCard(isFoil) {
 		});
 		
 		prepareForNextInput();
-	});
+	}).catch(() => alert("La carte n'a pas été trouvé"));
 }
 
 document.addEventListener("DOMContentLoaded", () => {
