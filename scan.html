@@ -7,7 +7,7 @@
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&family=Nunito&family=Strait&display=swap" />
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/louis-parent/Quill@main/styles/Quill.css" />
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/louis-parent/Quill@latest/styles/Quill.css" />
 		<link rel="stylesheet" href="styles/common.css" />
 		
 		<script defer type="module" src="scripts/scan.js"></script>
@@ -47,9 +47,9 @@
 			
 			<section class="column stretch at-center full-width">
 				<div class="row spaced at-center bottom-margin far">
-					<select id="set-selector" placeholder=""><option>Chargement...</option></select>
-					<input id="collector-input" type="number" placeholder="Num." />
-					<select id="language-selector">
+					<select id="set-selector" class="outlined primary"><option>Chargement...</option></select>
+					<input id="collector-input" class="outlined primary" type="number" placeholder="Num." min="1" step="1" />
+					<select id="language-selector" class="outlined primary">
 						<option value="en">Anglais</option>
 						<option value="es">Espagnol</option>
 						<option value="fr" selected>Français</option>
@@ -74,11 +74,11 @@
 						<img id="card" class="rounded quarter-screen-width" />
 					</div>
 					<div class="column stretch at-center">
-						<button id="to-foil" class="cta primary soft-rounded bottom-margin near">Changer pour Foil</button>
-						<button id="add-more" class="cta secondary soft-rounded bottom-margin step">Ajouter une autre</button>
-						<button id="add-more-foil" class="cta secondary soft-rounded bottom-margin near">Ajouter une autre Foil</button>
-						<button id="remove" class="cta secondary soft-rounded bottom-margin step">Supprimer</button>
-						<button id="remove-foil" class="cta secondary soft-rounded bottom-margin step">Supprimer une Foil</button>
+						<button id="to-foil" class="cta primary soft-rounded bottom-margin near">✨ Changer pour Foil ✨</button>
+						<button id="add-more" class="icon-prefixed cta secondary soft-rounded bottom-margin step"><b>➕</b> Ajouter une autre</button>
+						<button id="add-more-foil" class="icon-prefixed cta secondary soft-rounded bottom-margin near"><b>➕</b> Ajouter une autre Foil</button>
+						<button id="remove" class="icon-prefixed cta secondary soft-rounded bottom-margin step"><b>➖</b> Supprimer</button>
+						<button id="remove-foil" class="icon-prefixed cta secondary soft-rounded bottom-margin step"><b>➖</b> Supprimer une Foil</button>
 					</div>
 				</div>
 			</section>
