@@ -16,6 +16,27 @@ function prepareForNextInput() {
   		collectorInput.select();
 }
 
+function searchAndAddCard(isFoil) {
+	const collectorInput = document.querySelector("#collector-input");
+	const collectorNumber = collectorInput.value;
+	const set = document.querySelector("#set-selector").value;
+	const language = document.querySelector("#language-selector").value;
+	
+	Scryfall.getCardByCollectorNumber(set, collectorNumber, language).then(card => {
+		document.querySelector("#oracle").value = card.oracle.id;
+		document.querySelector("#set").value = card.set;
+		document.querySelector("#collector-number").value = card.collectorNumber;
+		document.querySelector("#language").value = card.language;
+		document.querySelector("#card").src = card.faces[0];
+		
+		cardCollection.synchronized(() => {
+			cardCollection.add(card.oracle.id, card.set, card.collectorNumber, card.language, isFoil, 1);
+		});
+		
+		prepareForNextInput();
+	});
+}
+
 document.addEventListener("DOMContentLoaded", () => {
 	Scryfall.sets.then(sets => {
 		const setSelector = document.querySelector("#set-selector");
@@ -39,30 +60,14 @@ document.addEventListener("DOMContentLoaded", () => {
 	
 	document.querySelector("#collector-input").addEventListener("keyup", (event) => {
 		event.preventDefault();
+		
 		if(event.keyCode === 13) {
-			document.querySelector("#add").click();
+			searchAndAddCard(event.ctrlKey);
 		}
 	});
 
-	document.querySelector("#add").addEventListener("click", () => {
-		const collectorInput = document.querySelector("#collector-input");
-		const collectorNumber = collectorInput.value;
-		const set = document.querySelector("#set-selector").value;
-		const language = document.querySelector("#language-selector").value;
-		
-		Scryfall.getCardByCollectorNumber(set, collectorNumber, language).then(card => {
-			document.querySelector("#oracle").value = card.oracle.id;
-			document.querySelector("#set").value = card.set;
-			document.querySelector("#collector-number").value = card.collectorNumber;
-			document.querySelector("#language").value = card.language;
-			document.querySelector("#card").src = card.faces[0];
-			
-			cardCollection.synchronized(() => {
-				cardCollection.add(card.oracle.id, card.set, card.collectorNumber, card.language, false, 1);
-			});
-			
-			prepareForNextInput();
-		});
+	document.querySelector("#add").addEventListener("click", (event) => {
+		searchAndAddCard(event.ctrlKey);
 	});
 
 	document.querySelector("#to-foil").addEventListener("click", () => {
