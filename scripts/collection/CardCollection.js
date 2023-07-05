@@ -32,7 +32,7 @@ class CardCollection {
 	}
 	
 	remove(oracle, set, collectorNumber, language, isFoil, number) {
-		if(this.collection[oracle] === undefined) {
+		if(this.collection[oracle] !== undefined) {
 			this.collection[oracle].remove(set, collectorNumber, language, isFoil, number);
 		}
 	}
