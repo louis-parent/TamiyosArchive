@@ -121,6 +121,7 @@ class CollectionItem {
 					
 					csv += card.multiverseIds[0] + 
 							",\"" + card.oracle.name.split("//")[0].trim() + "\"" +
+							"," + collectorNumber +
 							",\"" + set.toUpperCase() + "\"" +
 							"," + (this.owned[set][collectorNumber][language].nonFoil + this.owned[set][collectorNumber][language].foil) +
 							"," + this.owned[set][collectorNumber][language].foil;

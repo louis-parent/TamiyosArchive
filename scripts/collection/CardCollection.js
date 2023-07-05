@@ -57,7 +57,7 @@ class CardCollection {
 	}
 	
 	async toCSV() {
-		let csv = "Multiverse ID,Name,Set code,Count,Foil count";
+		let csv = "Multiverse ID,Name,Number,Set code,Count,Foil count";
 		
 		for(const item of Object.values(this.collection)) {
 			csv += "\n" + await item.toCSV();
