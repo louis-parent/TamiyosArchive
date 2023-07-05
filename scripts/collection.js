@@ -1,8 +1,10 @@
 import cardCollection from "./collection/CardCollection.js";
+import StareAtMouse from "https://cdn.jsdelivr.net/gh/louis-parent/Barb@latest/scripts/StareAtMouse.js";
 
 document.addEventListener("DOMContentLoaded", () => {
 	cardCollection.items.forEach(item => {
 		const container = document.createElement("div");
+		container.classList.add("card");
 		container.style.position = "relative";
 		container.style.width = "15vw";
 		container.style.minWidth = "256px";
@@ -70,6 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		pill.style.zIndex = "100";
 		container.appendChild(pill);
 		
+		StareAtMouse.watch(container);
 		document.querySelector("#cards").appendChild(container);
 	});
 	
