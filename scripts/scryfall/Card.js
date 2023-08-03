@@ -28,7 +28,7 @@ class Card {
 					id: data.oracle_id,
 					name: data.name
 				},
-				faces: data.card_faces !== undefined
+				faces: data.card_faces !== undefined && data.card_faces[0].image_uris != undefined
 					? data.card_faces.map(face => face.image_uris.png)
 					: [data.image_uris.png],
 				set: data.set,
