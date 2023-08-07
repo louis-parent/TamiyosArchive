@@ -1,4 +1,6 @@
 class Card {
+	static MAX_BATCH_SIZE = 75;
+		
 	constructor(id, data) {
 		this.id = id;
 		this.oracle = {
@@ -22,20 +24,42 @@ class Card {
 	
 	static forCollectorNumberUnsecure(set, collectorNumber, language) {
 		return fetch(`https://api.scryfall.com/cards/${set.toLowerCase()}/${collectorNumber}/${language !== undefined ? language : "en"}`)
-			.then(response => response.json())
-			.then(data => new Card(data.id, {
-				oracle: {
-					id: data.oracle_id,
-					name: data.name
-				},
-				faces: data.card_faces !== undefined && data.card_faces[0].image_uris != undefined
-					? data.card_faces.map(face => face.image_uris.png)
-					: [data.image_uris.png],
-				set: data.set,
-				collectorNumber: data.collector_number,
-				language: data.lang,
-				multiverseIds: data.multiverse_ids
-			}));
+		.then(response => response.json())
+		.then(data => Card.fromRaw(data));
+	}
+	
+	static forConstraints(constraints) {
+		if(constraints.length > Card.MAX_BATCH_SIZE) throw new Error("Cannot get a batch of card with more of " + Card.MAX_BATCH_SIZE + " cards");
+		
+		return fetch("https://api.scryfall.com/cards/collection", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({
+				identifiers: constraints
+			})
+		})
+		.then((response) => response.json())
+		.then(data => {
+			return data.data.map(card => Card.fromRaw(card))
+		});
+	}
+	
+	static fromRaw(data) {
+		return new Card(data.id, {
+			oracle: {
+				id: data.oracle_id,
+				name: data.name
+			},
+			faces: data.card_faces !== undefined && data.card_faces[0].image_uris != undefined
+				? data.card_faces.map(face => face.image_uris.png)
+				: [data.image_uris.png],
+			set: data.set,
+			collectorNumber: data.collector_number,
+			language: data.lang,
+			multiverseIds: data.multiverse_ids
+		});
 	}
 }
 

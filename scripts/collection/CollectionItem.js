@@ -20,7 +20,11 @@ class CollectionItem {
 		const collectorNumber = Object.keys(this.owned[set])[0];
 		const language = Object.keys(this.owned[set][collectorNumber])[0];
 
-		return Scryfall.getCardByCollectorNumber(set, collectorNumber, language);
+		return {
+			set: set,
+			collectorNumber: collectorNumber,
+			language: language
+		};
 	}
 	
 	get count() {

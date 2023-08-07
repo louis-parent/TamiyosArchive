@@ -56,6 +56,36 @@ class CardCollection {
 		return raw;
 	}
 	
+	async asCardList() {
+		const cards = new Array();
+		const collection = Object.values(this.collection);
+		const chunkSize = 75;
+		
+		for(let i = 0; i < collection.length; i += chunkSize) {
+			const chunk = collection.slice(i, i + chunkSize);
+			
+			cards.push(...await Scryfall.getCardsByConstraint(chunk.map(item => {
+				const newestCard = item.newestCard;
+				
+				return {
+					set: newestCard.set,
+					collector_number: newestCard.collectorNumber
+				};
+			})));
+		}
+		
+		return Promise.all(cards).then(cards => {
+			return cards.map(card => {
+				const item = this.collection[card.oracle.id];
+				return {
+					nonFoilCount: item.nonFoilCount,
+					foilCount: item.foilCount,
+					card: card
+				};
+			});
+		});
+	}
+	
 	async toCSV() {
 		let csv = "Multiverse ID,Name,Number,Set code,Count,Foil count";
 		
