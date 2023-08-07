@@ -58,6 +58,11 @@ nav > .selected
 	border-radius: 3px;
 }
 
+nav .nav-icon
+{
+	font-size: 32px;
+}
+
 main > section
 {
 	width: auto;
