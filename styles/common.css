@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lumanosimo&family=Pontano+Sans&display=swap');
+
 :root
 {	
 	--primary: #8677A6;
@@ -19,6 +21,11 @@
 	
 	--headline-font: 'Montserrat', sans-serif;
 	--paragraph-font: 'Nunito', sans-serif;
+}
+
+*
+{
+	font-family: 'Pontano Sans', sans-serif;
 }
 
 body
@@ -66,4 +73,9 @@ nav .nav-icon
 main > section
 {
 	width: auto;
+}
+
+h1, h2, h3
+{
+	font-family: 'Lumanosimo', cursive;
 }
