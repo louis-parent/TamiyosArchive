@@ -1,8 +1,10 @@
 import cardCollection from "./collection/CardCollection.js";
 import StareAtMouse from "https://cdn.jsdelivr.net/gh/louis-parent/Barb@latest/scripts/StareAtMouse.js";
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {	
 	cardCollection.asCardList().then(items => {
+		document.querySelector("#cards").innerHTML = "";
+		
 		items.forEach(item => {
 			const container = document.createElement("div");
 			container.classList.add("card");
