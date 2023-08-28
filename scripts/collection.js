@@ -6,8 +6,9 @@ document.addEventListener("DOMContentLoaded", () => {
 		document.querySelector("#cards").innerHTML = "";
 		
 		items.forEach(item => {
-			const container = document.createElement("div");
+			const container = document.createElement("a");
 			container.classList.add("card");
+			container.href = `card.html?set=${item.card.setCode}&collector_number=${item.card.collectorNumber}&lang=${item.inCollection.language}`;
 			container.style.position = "relative";
 			container.style.width = "15vw";
 			container.style.minWidth = "256px";

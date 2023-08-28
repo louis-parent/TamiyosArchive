@@ -80,7 +80,8 @@ class CardCollection {
 				return {
 					nonFoilCount: item.nonFoilCount,
 					foilCount: item.foilCount,
-					card: card
+					card: card,
+					inCollection: item.newestCard
 				};
 			});
 		});

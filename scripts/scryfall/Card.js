@@ -1,3 +1,5 @@
+import Set from "./Set.js";
+
 class Card {
 	static MAX_BATCH_SIZE = 75;
 		
@@ -5,21 +7,34 @@ class Card {
 		this.id = id;
 		this.oracle = {
 			id: data.oracle.id,
-			name: data.oracle.name
+			name: data.oracle.name,
+			manaCost: data.oracle.manaCost,
+			text: data.oracle_text
 		};
 		
 		this.multiverseIds = data.multiverseIds;
-		this.set = data.set;
+		this.setCode = data.set;
 		this.collectorNumber = data.collectorNumber;
+		this.rarity = data.rarity
 		this.language = data.language;
 		
 		this.faces = data.faces;
 		
+		this.localization = {
+			name: data.localization.name,
+			text: data.localization.text,
+			type: data.localization.type
+		};
+		
 		Object.freeze(this);
 	}
 	
+	get set() {
+		return Set.forCode(this.setCode);
+	}
+	
 	static forCollectorNumber(set, collectorNumber, language) {
-		return Card.forCollectorNumberUnsecure(set, collectorNumber, language).catch(() => Card.forCollectorNumberUnsecure(set, collectorNumber));
+		return Card.forCollectorNumberUnsecure(set, collectorNumber, language).catch(() => Card.forCollectorNumberUnsecure(set, collectorNumber, "en").catch(() => Card.forCollectorNumberUnsecure(set, collectorNumber, "ph")));
 	}
 	
 	static forCollectorNumberUnsecure(set, collectorNumber, language) {
@@ -50,7 +65,8 @@ class Card {
 		return new Card(data.id, {
 			oracle: {
 				id: data.oracle_id,
-				name: data.name
+				name: data.name,
+				manaCost: data.mana_cost
 			},
 			faces: data.card_faces !== undefined && data.card_faces[0].image_uris != undefined
 				? data.card_faces.map(face => face.image_uris.png)
@@ -58,7 +74,13 @@ class Card {
 			set: data.set,
 			collectorNumber: data.collector_number,
 			language: data.lang,
-			multiverseIds: data.multiverse_ids
+			multiverseIds: data.multiverse_ids,
+			rarity: data.rarity,
+			localization: {
+				name: data.printed_name || data.name,
+				text: data.printed_text || data.oracle_text,
+				type: data.printed_type_line || data.type_line
+			}
 		});
 	}
 }

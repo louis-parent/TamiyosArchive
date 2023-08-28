@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Le Journal de Tamiyo</title>
+		<link rel="icon" type="image/svg+xml" href="assets/icon.svg" />
+		
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&family=Nunito&family=Strait&display=swap" />
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/louis-parent/Quill@latest/styles/Quill.css" />
+		<link rel="stylesheet" href="styles/common.css" />
+		
+		<script type="module" src="scripts/card.js"></script>
+	</head>
+	<body class="background dark">
+		<header class="padding-midrange row at-center">
+			<img class="right-padding-midrange" alt="Icon" src="assets/icon.svg" height="64" />
+			<h1 class="no-margin">Le Journal de Tamiyo</h1>
+		</header>
+		
+		<main>			
+			<nav class="background above column from-start at-center">
+				<a class="column at-center" href="index.html">
+					<span class="nav-icon">🔍</span>
+					Explore
+				</a>
+				
+				<a class="column at-center" href="collection.html">
+					<span class="nav-icon">🃏</span>
+					Collection
+				</a>
+				
+				<a class="column at-center" href="decks.html">
+					<span class="nav-icon">📦</span>
+					Decks
+				</a>
+				
+				<a class="column at-center" href="stats.html">
+					<span class="nav-icon">📊</span>
+					Stats
+				</a>
+				
+				<a class="column at-center" href="scan.html">
+					<span class="nav-icon">📲</span>
+					Scan
+				</a>
+			</nav>
+			
+			<section class="full-width">
+				<div class="row gapped at-center horizontal-margin-far">
+					<div class="relative" style="height: 384px;">						
+						<img id="illustration" alt="Illustration" class="absolute front" style="width: 384px; top: 0; left: 0;" />
+						
+						<div id="details" class="absolute background above rounded quarter-screen-width vertical-padding-near horizontal-padding-far behind" style="top: 12px; left: 372px;">
+							<div class="row at-center">
+								<span id="name" class="right-margin-step"></span>
+								<span id="mana-cost" class="row at-center"></span>
+							</div>
+							
+							<hr />
+							
+							<span id="type"></span>
+							
+							<hr />
+							
+							<span id="text"></span>
+							
+						</div>
+					</div>
+					
+					<div id="sets" class="background above padding-near rounded half-screen-height-min" style="width: 18.5vw;">
+						<div class="row at-center">
+							<img id="set-icon" class="right-padding-near" style="height: 2em;" />
+							
+							<div class="column full-width">
+								<div id="set" class="row at-center">
+									<span id="set-name" class="right-padding-step bold capitalized"></span>
+									<span>(<span id="set-code" class="italic uppercase"></span> )</span>
+								</div>
+								
+								<hr class="full-width" />
+								
+								<div id="card-in-set" class="row at-center" style="font-size: 0.9em;">
+									<span class="right-padding-step italic">#<span id="collector-number" ></span></span>
+									<span id="rarity" class="capitalized"></span>
+								</div>
+							</div>
+						</div>
+						
+						<hr />
+						
+						<ul id="prints"></ul>
+					</div>
+				</div>
+			</section>
+		</main>
+	</body>
+</html>
